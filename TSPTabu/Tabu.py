@@ -18,3 +18,6 @@ class Tabu:
         self.initialInstance = Greedy(self.inputVector)
         self.initialInstance.solveGreedy()
         self.solution = self.initialInstance.solution
+        #CONVENTION: from the moment of self.initialInstance being generated self.solution contains two instances
+        #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
+        #is greater than actual solution vector with unique only vertecies
