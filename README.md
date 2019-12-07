@@ -19,4 +19,4 @@ parameters:
 	* X: int()
 	* XValue being the value that swaping pairs of vertecies X times should decrease objective function value by
 	* number of iterations during which banned pair remains in tabu matrix: int()
-	* aspiration criterion value: float()
+	* aspiration criterion value: float(ór potęgowy)
