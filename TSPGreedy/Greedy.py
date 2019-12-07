@@ -1,4 +1,4 @@
-from TSPGreedy.SolutionContainer import SolutionContainer
+from TSPCoreComponents.SolutionContainer import SolutionContainer
 from TSPCoreComponents.Computer import Computer
 
 class Greedy:
