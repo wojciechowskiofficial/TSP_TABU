@@ -25,5 +25,3 @@ class Tabu:
 
 
         print(self.solution)
-
-    def gen
