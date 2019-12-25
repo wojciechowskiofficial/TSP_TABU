@@ -13,3 +13,11 @@ class Computer:
                 minIndex = i
 
         return {'minIndex': minIndex, 'minDist': minDist}
+
+    def overVec(vec: list()):
+        acc = 0
+        for i in range(-1, len(vec) - 1):
+            first = vec[i - 1].getPos()
+            second = vec[i].getPos()
+            acc += Computer.dist(first, second)
+        return acc

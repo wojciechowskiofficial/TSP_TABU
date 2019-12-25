@@ -24,3 +24,15 @@ class SolutionContainer:
 
     def __len__(self):
         return len(self.verticesVector)
+
+    def __getitem__(self, item):
+        return self.verticesVector[item]
+
+    def __setitem__(self, key, value):
+        self.verticesVector[key] = value
+
+    def get_id(self, x):
+        for i in range(len(self.verticesVector) - 1):
+            if self.verticesVector[i].id == x:
+                return i
+        return -1
