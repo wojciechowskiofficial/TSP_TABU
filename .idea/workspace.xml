@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcad1c37-1c5a-48c5-bbcf-c7bc1d43eaaf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TSPTabu/PowerSet.py" beforeDir="false" afterPath="$PROJECT_DIR$/TSPTabu/PowerSet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TSPTabu/SwapPair.py" beforeDir="false" afterPath="$PROJECT_DIR$/TSPTabu/SwapPair.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TSPTabu/Tabu.py" beforeDir="false" afterPath="$PROJECT_DIR$/TSPTabu/Tabu.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
