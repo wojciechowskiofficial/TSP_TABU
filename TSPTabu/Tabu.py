@@ -1,6 +1,7 @@
 from TSPGreedy.Greedy import Greedy
 from TSPTabu.TabuMatrix import TabuMatrix
 from TSPTabu.PowerSet import PowerSet
+from copy import deepcopy
 
 class Tabu:
     #Tabu class constructor takes instance parameters as arguments
@@ -29,3 +30,5 @@ class Tabu:
         self.initialInstance.solveGreedy()
         self.solution = self.initialInstance.solution
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
+        #initialize globally optimal solution as initial greedy solution
+        self.globallyOptimal = deepcopy(self.solution)
