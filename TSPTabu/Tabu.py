@@ -1,7 +1,6 @@
 from TSPGreedy.Greedy import Greedy
 from TSPTabu.TabuMatrix import TabuMatrix
 from TSPTabu.SwapPair import SwapPair
-from TSPCoreComponents.Computer import Computer
 
 class Tabu:
     #Tabu class constructor takes instance parameters as arguments
@@ -24,7 +23,4 @@ class Tabu:
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
-        test = SwapPair(self.solution, 0, 0)
-        print(test.vec)
-
-        print(self.solution)
+        test = SwapPair(self.solution, 1, 5)

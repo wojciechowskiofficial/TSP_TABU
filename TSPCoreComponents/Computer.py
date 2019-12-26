@@ -16,6 +16,7 @@ class Computer:
 
     def overVec(vec: list()):
         acc = 0
+        #already contains full cycle with connected first/last vertex
         for i in range(1, len(vec)):
             first = vec[i - 1].getPos()
             second = vec[i].getPos()
