@@ -19,6 +19,7 @@ class SwapPair:
         self.vec = deepcopy(vec)
         self.swap()
         self.vec.objFunctValue = Computer.overVec(self.vec)
+        self.objFunctValue = self.vec.objFunctValue
 
     def swap(self):
         (a, b) = (self.vec[self.first], self.vec[self.second])
