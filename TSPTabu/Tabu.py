@@ -23,12 +23,17 @@ class Tabu:
         #CONVENTION: from the moment of self.initialInstance being generated self.solution contains two instances
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
-        self.powerset = PowerSet(self.solution)
+        self.numberOfIterations = 0
+        while True:
+            self.powerset = PowerSet(self.solution)
+            self.numberOfIterations += 1
+            if self.numberOfIterations == 10:
+                break
 
     def initialize(self):
         self.initialInstance = Greedy(self.inputVector)
         self.initialInstance.solveGreedy()
         self.solution = self.initialInstance.solution
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
-        #initialize globally optimal solution as initial greedy solution
+        #initialize globally optimal solution with initial greedy solution
         self.globallyOptimal = deepcopy(self.solution)
