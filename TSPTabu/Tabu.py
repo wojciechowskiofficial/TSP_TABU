@@ -24,7 +24,7 @@ class Tabu:
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
-        test = SwapPair(self.solution, 0, 2)
+        test = SwapPair(self.solution, 0, 0)
         print(test.vec)
 
         print(self.solution)
