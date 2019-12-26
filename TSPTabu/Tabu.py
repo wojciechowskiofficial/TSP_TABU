@@ -10,11 +10,13 @@ class Tabu:
     #uValue: value that objective function value should decrease by during uIter iterations
     #aspiration: value which swaping a banned pair of vertices should decrease the objective function value by
     #to ignore the fact that the pair is currently in tabu matrix
+    #banPeriod: number of iterations during which banned pair stays in tabu matrix
     def __init__(self, inputVector, **kwargs):
         self.maxIter = kwargs['maxIter']
         self.uIter = kwargs['uIter']
         self.uValue = kwargs['uValue']
         self.aspiration = kwargs['aspiration']
+        self.banPeriod = kwargs['banPeriod']
         self.inputVector = inputVector
 
     def solveTabu(self):
@@ -26,6 +28,10 @@ class Tabu:
         self.numberOfIterations = 0
         while True:
             self.powerset = PowerSet(self.solution)
+            self.nextPair = self.choseNext()
+            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod)
+            #                                       $$$$finished here$$$$
+
             self.numberOfIterations += 1
             if self.numberOfIterations == 10:
                 break
@@ -37,3 +43,21 @@ class Tabu:
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
         #initialize globally optimal solution with initial greedy solution
         self.globallyOptimal = deepcopy(self.solution)
+
+    def isTabu(self, vec):
+        if self.tabuMatrix.get(vec.first, vec.second) == 0:
+            return False
+        else:
+            return True
+
+    def choseNext(self):
+        tmp = None
+        for tmp in self.powerset.pairs:
+            if self.isTabu(tmp):
+                #do tabu stuff
+                pass
+            else:
+                return tmp
+        if tmp is None:
+            print('no feasible solution found')
+            exit(0)

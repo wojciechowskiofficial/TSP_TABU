@@ -10,11 +10,9 @@ class TabuMatrix:
     def set(self, i, j, value):
         if self.matrix is not None:
             self.matrix[i][j] = value
-        else:
-            raise IndexError
 
     def get(self, i, j):
         if self.matrix is not None:
             return self.matrix[i][j]
-        else:
-            raise IndexError
+
+    #TODO: secure order of i, j in self.get and self.set
