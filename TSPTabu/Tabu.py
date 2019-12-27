@@ -36,9 +36,12 @@ class Tabu:
             self.nextPair = self.choseNext()
             # tag newly chosen solution as tabu
             self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod)
-            #print('first:', self.nextPair.first, 'second:', self.nextPair.second)
+            print('first:', self.nextPair.first, 'second:', self.nextPair.second)
             # assing self.solution <- self.nextPair as 'transition' step in main algo. loop
             self.solution = self.nextPair.vec
+            # check if self.solution is globally optimal and substitute if True
+            if self.solution.objFunctValue < self.globallyOptimal.objFunctValue:
+                self.globallyOptimal = self.solution
 
     def initialize(self):
         self.initialInstance = Greedy(self.inputVector)
