@@ -7,12 +7,27 @@ class TabuMatrix:
             for j in range(self.size):
                 self.matrix[i].append(0)
 
+    def __str__(self):
+        return '\n'.join([str(row) for row in self.matrix])
+
+    def __repr__(self):
+        return self.__str__()
+
     def set(self, i, j, value):
-        if self.matrix is not None:
-            self.matrix[i][j] = value
+        (i, j) = self.checkSecurity(i, j)
+        self.matrix[i][j] = value
 
     def get(self, i, j):
-        if self.matrix is not None:
-            return self.matrix[i][j]
+        (i, j) = self.checkSecurity(i, j)
+        return self.matrix[i][j]
 
-    #TODO: secure order of i, j in self.get and self.set
+    #method which ensures that element indicated by i and j is in upper triangular matrix
+    #excluding main diagonal of the matrix
+    def checkSecurity(self, _i, _j):
+        if _i > _j:
+            (i, j) = (_j, _i)
+        else:
+            (i, j) = (_i, _j)
+        if i == j:
+            raise IndexError('tabu matrix ids cannot indicate main diagonal matrix position')
+        return (i, j)
