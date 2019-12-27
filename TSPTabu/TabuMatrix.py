@@ -31,3 +31,4 @@ class TabuMatrix:
         if i == j:
             raise IndexError('tabu matrix ids cannot indicate main diagonal matrix position')
         return (i, j)
+

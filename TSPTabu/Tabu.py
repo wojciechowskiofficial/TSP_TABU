@@ -26,15 +26,16 @@ class Tabu:
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
         self.numberOfIterations = 0
-        while True:
-            self.powerset = PowerSet(self.solution)
-            self.nextPair = self.choseNext()
-            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod)
-            #                                       $$$$finished here$$$$
 
-            self.numberOfIterations += 1
-            if self.numberOfIterations == 10:
-                break
+        for i in range(10):
+            # generate powerset of feasible solutions
+            self.powerset = PowerSet(self.solution)
+            # chose next solution taking tabu matrix and aspiration under consideration
+            self.nextPair = self.choseNext()
+            # tag newly chosen solution as tabu
+            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod + i)
+            # assing self.solution <- self.nextPair as 'transition' step in main algo. loop
+            self.solution = self.nextPair.vec
 
     def initialize(self):
         self.initialInstance = Greedy(self.inputVector)
