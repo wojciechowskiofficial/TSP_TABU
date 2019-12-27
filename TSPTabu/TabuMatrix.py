@@ -32,3 +32,9 @@ class TabuMatrix:
             raise IndexError('tabu matrix ids cannot indicate main diagonal matrix position')
         return (i, j)
 
+    #decrement all values in upper triangular matrix
+    def decrement(self):
+        for i in range(self.size):
+            for j in range(i + 1, self.size):
+                if self.get(i, j) > 0:
+                    self.set(i, j, self.get(i, j) - 1)

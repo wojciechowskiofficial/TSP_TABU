@@ -28,12 +28,15 @@ class Tabu:
         self.numberOfIterations = 0
 
         for i in range(10):
+            #decrement tabu values
+            self.tabuMatrix.decrement()
             # generate powerset of feasible solutions
             self.powerset = PowerSet(self.solution)
             # chose next solution taking tabu matrix and aspiration under consideration
             self.nextPair = self.choseNext()
             # tag newly chosen solution as tabu
-            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod + i)
+            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod)
+            #print('first:', self.nextPair.first, 'second:', self.nextPair.second)
             # assing self.solution <- self.nextPair as 'transition' step in main algo. loop
             self.solution = self.nextPair.vec
 
