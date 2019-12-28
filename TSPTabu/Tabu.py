@@ -7,19 +7,14 @@ from time import time
 
 class Tabu:
     #Tabu class constructor takes instance parameters as arguments
+    #auto: if True sets params automatically
+    #maxTime: maximal time of computations
     #maxIter: maximal number of main for loop iterations
-    #uIter: maximal number of iterations during which objective function value does not change by uValue
-    #uValue: value that objective function value should decrease by during uIter iterations
     #aspiration: value which swaping a banned pair of vertices should decrease the objective function value by
     #to ignore the fact that the pair is currently in tabu matrix
     #banPeriod: number of iterations during which banned pair stays in tabu matrix
     def __init__(self, inputVector, **kwargs):
-        self.maxTime = kwargs['maxTime']
-        self.maxIter = kwargs['maxIter']
-        self.uIter = kwargs['uIter']
-        self.uValue = kwargs['uValue']
-        self.aspiration = kwargs['aspiration']
-        self.banPeriod = kwargs['banPeriod']
+        self.params = kwargs
         self.inputVector = inputVector
         self.firstClock = 0
         self.secondClock = 0
@@ -32,10 +27,7 @@ class Tabu:
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
 
-        #if maxIter parameter specified
         self.numberOfIterations = 0
-        #init time measuring variable
-
         # log self.firstClock
         self.firstClock = time()
         while True:
@@ -46,7 +38,7 @@ class Tabu:
             # chose next solution taking tabu matrix and aspiration under consideration
             self.nextPair = self.choseNext()
             # tag newly chosen solution as tabu
-            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.banPeriod)
+            self.tabuMatrix.set(self.nextPair.first, self.nextPair.second, self.params['banPeriod'])
             # assing self.solution <- self.nextPair as 'transition' step in main algo. loop
             self.solution = self.nextPair.vec
             # check if self.solution is globally optimal and substitute if True
@@ -54,13 +46,13 @@ class Tabu:
                 self.globallyOptimal = self.solution
             self.numberOfIterations += 1
             #if maxIter parameter specified
-            if self.maxIter is not None and self.numberOfIterations == self.maxIter:
+            if self.params['maxIter'] is not None and self.numberOfIterations == self.params['maxIter']:
                 break
             #check time termination condition
             self.secondClock = time()
             self.elapsed = self.secondClock - self.firstClock
-            print(self.elapsed, self.maxTime)
-            if self.elapsed >= self.maxTime:
+            print(self.elapsed, self.params['maxTime'])
+            if self.elapsed >= self.params['maxTime']:
                 break
                 print('TIME TERMINATION')
                 exit(0)
@@ -73,6 +65,7 @@ class Tabu:
         self.tabuMatrix = TabuMatrix(len(self.solution) - 1)
         #initialize globally optimal solution with initial greedy solution
         self.globallyOptimal = deepcopy(self.solution)
+        self.autoTune()
 
     def isTabu(self, vec):
         if self.tabuMatrix.get(vec.first, vec.second) == 0:
@@ -83,7 +76,7 @@ class Tabu:
     #this method shall be performed on SolutionContainer that is already in TabuMatrix
     #condition of aspiration: >=
     def isAspiring(self, vec: SwapPair):
-        if abs(self.solution.objFunctValue - vec.objFunctValue) >= self.aspiration:
+        if abs(self.solution.objFunctValue - vec.objFunctValue) >= self.params['aspiration']:
             return True
         else:
             return False
@@ -99,3 +92,10 @@ class Tabu:
         if tmp is None:
             print('no feasible solution found')
             exit(0)
+
+    def autoTune(self):
+        if self.params['auto'] == True:
+            self.params['maxTime'] = 180
+            self.params['maxIter'] = None
+            self.params['aspiration'] = int(len(self.solution.verticesVector) / 10)
+            self.params['banPeriod'] = int(len(self.solution.verticesVector) / 10)
