@@ -3,6 +3,7 @@ from TSPTabu.TabuMatrix import TabuMatrix
 from TSPTabu.PowerSet import PowerSet
 from TSPTabu.SwapPair import SwapPair
 from copy import deepcopy
+from time import time
 
 class Tabu:
     #Tabu class constructor takes instance parameters as arguments
@@ -13,12 +14,15 @@ class Tabu:
     #to ignore the fact that the pair is currently in tabu matrix
     #banPeriod: number of iterations during which banned pair stays in tabu matrix
     def __init__(self, inputVector, **kwargs):
+        self.maxTime = kwargs['maxTime']
         self.maxIter = kwargs['maxIter']
         self.uIter = kwargs['uIter']
         self.uValue = kwargs['uValue']
         self.aspiration = kwargs['aspiration']
         self.banPeriod = kwargs['banPeriod']
         self.inputVector = inputVector
+        self.firstClock = 0
+        self.secondClock = 0
 
 
     def solveTabu(self):
@@ -28,11 +32,13 @@ class Tabu:
         #of the first vertex (as 0th and last element of list). this implies that the length of self.solution
         #is greater than actual solution vector with unique only vertices by exactly 1.
 
-        #if maxIter paramter specified
-        if self.maxIter is not None:
-            self.numberOfIterations = 0
+        #if maxIter parameter specified
+        self.numberOfIterations = 0
+        #init time measuring variable
 
-        for i in range(100):
+        # log self.firstClock
+        self.firstClock = time()
+        while True:
             #decrement tabu values
             self.tabuMatrix.decrement()
             # generate powerset of feasible solutions
@@ -46,12 +52,18 @@ class Tabu:
             # check if self.solution is globally optimal and substitute if True
             if self.solution.objFunctValue < self.globallyOptimal.objFunctValue:
                 self.globallyOptimal = self.solution
-            #if maxIter paramter specified
-            if self.maxIter is not None:
-                self.numberOfIterations += 1
-                if self.numberOfIterations == self.maxIter:
-                    break
-
+            self.numberOfIterations += 1
+            #if maxIter parameter specified
+            if self.maxIter is not None and self.numberOfIterations == self.maxIter:
+                break
+            #check time termination condition
+            self.secondClock = time()
+            self.elapsed = self.secondClock - self.firstClock
+            print(self.elapsed, self.maxTime)
+            if self.elapsed >= self.maxTime:
+                break
+                print('TIME TERMINATION')
+                exit(0)
 
     def initialize(self):
         self.initialInstance = Greedy(self.inputVector)
