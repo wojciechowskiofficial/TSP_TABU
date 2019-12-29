@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcad1c37-1c5a-48c5-bbcf-c7bc1d43eaaf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/TSPTabu/Tabu.py" beforeDir="false" afterPath="$PROJECT_DIR$/TSPTabu/Tabu.py" afterDir="false" />
-    </list>
+    <list default="true" id="dcad1c37-1c5a-48c5-bbcf-c7bc1d43eaaf" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
