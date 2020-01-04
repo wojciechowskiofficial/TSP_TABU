@@ -76,7 +76,7 @@ class Tabu:
     #this method shall be performed on SolutionContainer that is already in TabuMatrix
     #condition of aspiration: >=
     def isAspiring(self, vec: SwapPair):
-        if abs(self.solution.objFunctValue - vec.objFunctValue) >= self.params['aspiration']:
+        if self.solution.objFunctValue - vec.objFunctValue >= self.params['aspiration']:
             return True
         else:
             return False
@@ -89,13 +89,13 @@ class Tabu:
                     return tmp
             else:
                 return tmp
-        if tmp is None:
-            print('no feasible solution found')
-            exit(0)
+        print('no feasible solution')
+        exit(0)
 
     def autoTune(self):
-        if self.params['auto'] == True:
-            self.params['maxTime'] = 180
-            self.params['maxIter'] = None
-            self.params['aspiration'] = int(len(self.solution.verticesVector) / 10)
-            self.params['banPeriod'] = int(len(self.solution.verticesVector) / 10)
+        if 'auto' in self.params.keys():
+            if self.params['auto'] == True:
+                self.params['maxTime'] = 180
+                self.params['maxIter'] = None
+                self.params['aspiration'] = int(len(self.solution.verticesVector) / 10)
+                self.params['banPeriod'] = int(len(self.solution.verticesVector) / 10)

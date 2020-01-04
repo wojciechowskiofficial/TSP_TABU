@@ -2,20 +2,20 @@ import random
 import os
 
 class InstanceGenerator:
-    def __init__(self, size, constrains = None):
+    def __init__(self, size, constraints = None):
         self.size = size
-        if constrains is None:
-            self.constrains = size * 1000
+        if constraints is None:
+            self.constraints = size * 1000
         else:
-            self.constrains = constrains
+            self.constraints = constraints
         self.fileName = None
         self.pathName = None
 
     def assembleFileName(self):
         string = 'gen_size_'
         string += str(self.size)
-        string += '_constrains_'
-        string += str(self.constrains)
+        string += '_constraints_'
+        string += str(self.constraints)
         string += '.txt'
         self.fileName = string
 
@@ -40,8 +40,8 @@ class InstanceGenerator:
             for i in range(self.size):
                 f.write(str(i + 1))
                 f.write(' ')
-                f.write(str(random.randint(0, self.constrains)))
+                f.write(str(random.randint(0, self.constraints)))
                 f.write(' ')
-                f.write(str(random.randint(0, self.constrains)))
+                f.write(str(random.randint(0, self.constraints)))
                 f.write('\n')
 
