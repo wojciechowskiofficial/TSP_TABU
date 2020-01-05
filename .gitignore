@@ -1,2 +1,4 @@
 main.py
-./IOFiles
+IOFiles/*
+benchmark*
+pseudo.py
